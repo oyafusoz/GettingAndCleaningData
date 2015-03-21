@@ -28,9 +28,10 @@ fulldf = fulldf[,grep('mean[.]|std', names(xtrain))] #[.]removes mean frequency 
 
 #Just extract the columns with the mean variables
 fulldf_mean = fulldf[,grep('mean', names(fulldf))]
+means = as.vector(apply(fulldf_mean, MARGIN = 2, FUN = mean))
 
 #Create a df with the means of all the activities over all subjects
-tidydf = data.frame(activity = names(fulldf_mean), mean = as.vector(apply(fulldf_mean, MARGIN = 2, FUN = mean)))
+tidydf = data.frame(activity = names(fulldf_mean), mean = means)
 
 #Remove the '.mean...' in each of the names
 tidydf$activity = gsub('.mean..', '', tidydf$activity)
